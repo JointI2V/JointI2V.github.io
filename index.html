@@ -1,0 +1,247 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>JointI2V: A Multimodal Framework for Fine-Grained Joint Control of Camera and Scene Subjects</title>
+    <link href="static/css/style_s.css" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="static/css/index.css" />
+    <style>
+      card-table {
+        width: 100%;
+        border-collapse: separate;
+        /* 允许单元格之间分开，这样圆角不会被遮挡 */
+        border-spacing: 10px;
+        /* 单元格之间的间距 */
+      }
+
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        height: 350px;
+        /* 固定高度，根据需要调整 */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card video {
+        width: 100%;
+        display: block;
+      }
+
+      .card-content {
+        padding: 10px;
+        flex: 1;
+      }
+
+      .card-content p {
+        text-align: justify;
+        margin: 0 0 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <h1><strong>JointI2V: A Multimodal Framework for Fine-Grained Joint Control of Camera and Scene Subjects</strong></h1>
+      <div style="text-align: center; margin-top: 1.5em;">
+        <img src="resources/teaser.png" style="width: 100%; height: auto;" />
+      </div>
+    </div>
+
+    <div class="content">
+      <p
+        style="
+          text-align: center;
+          font-size: 2em;
+          font-weight: bold;
+          line-height: 1.2;
+        "
+        class="sansserif"
+      >
+        Abstract
+      </p>
+      <p style="font-size: 1.2em" class="serif">
+        In recent years, video generation has seen remarkable progress in both content quality and generation efficiency. 
+        
+        However, achieving joint control of scene subjects and camera motion, as well as enabling fine-grained camera trajectory generation with large-range and arbitrary directions, remains a significant challenge. 
+
+        This is especially true in complex scenarios where the camera is required to execute precise motions around dynamically moving objects, imposing higher demands on generative models. 
+        
+        To address these issues, we propose JointI2V, an end-to-end multimodal video generation framework that enables simultaneous control of both scene subjects and camera trajectories. 
+        
+        Our method supports various forms of control inputs, including textual prompts, trajectory data, and exemplar videos-and unifies them into fine-grained frame-level manipulation signals. 
+        
+        We introduce a novel Camera-Aware Attention module that deeply integrates camera motion cues into the generative process. 
+        
+        To equip the model with robust joint control capabilities, we design a multi-stage curriculum learning strategy that progressively disentangles and integrates subject and camera controls. 
+        
+        Furthermore, we construct MMJointCtrl, a large-scale, high-quality multimodal control dataset comprising over 100K control instances, organized to support progressive learning from simple to complex tasks. 
+        
+        Experimental results demonstrate that JointI2V achieves state-of-the-art performance in fine-grained, complex multimodal joint control of camera and subject, offering a powerful solution for multimodal video generation. We will soon release our source code.
+      </p>
+    </div>
+
+    
+    <!-- 2. -->
+    <div class="content">
+      <p
+        style="
+          text-align: center;
+          font-size: 2em;
+          font-weight: bold;
+          line-height: 1.2;
+        "
+        class="sansserif"
+      >
+        Examples
+      </p>
+      <div>
+        <table align="center" style="
+        text-align: center;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      ">
+        <thead>
+          <tr>
+            <th style="width: 50%; padding: 8px;">Prompt</th>
+            <th style="width: 25%; padding: 8px;">Trajectory</th>
+            <th style="width: 25%; padding: 8px;">JointI2V</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 第一行 -->
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A view of a wooden staircase leading to an upper floor, with a small window and a framed artwork on the wall. the scene transitions to a serene interior with a wooden handrail, a window, and a framed artwork, with a bedroom visible in the background. next, the view opens to a spacious bedroom with a slanted ceiling, a large bed, and a wooden dresser. The bedroom features a modern design with a neutral color palette, recessed lighting, and a flat-screen TV. The video concludes with a similar bedroom scene, emphasizing the room's tranquil ambiance. ; Caption: The camera moves according to the #trajectory.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_1.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/1.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A cozy home interior with a beige carpet, light walls, and a wooden console table with a green plant, books, and a decorative bowl. a wicker chair and a desk with a computer, papers, and a lamp are visible, along with a shelving unit with books and decorative items. the room is well-lit by natural light from windows with sheer curtains. a black leather chair, a wicker armchair, and a desk with a computer, printer, and speakers are also present, alongside a small plant and framed pictures. The space is tidy, with a desk cluttered with paper and a printer, and a guitar on a stand adds a personal touch. ; Camera: The camera moves according to the #trajectory.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_2.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/2.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: The area is furnished with a round glass-top table, wicker chairs with red cushions, and a ceiling fan with a light fixture. decorative elements include framed artwork, a potted plant, and a vase with flowers. the space opens to a living area with a sofa and armchairs, suggesting an open-plan design. The ambiance is warm and inviting, with natural light enhancing the neutral color palette and decorative items. ; Camera: The camera pans continuously to the left.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_3.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/3.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A two-lane road stretches into the distance under a cloudy sky, bordered by trees on both sides. The scene is dimly lit, suggesting early morning or late evening, with a sense of quiet and solitude. The object in the image is stationary; Camera: From 1 to 3 seconds, the camera moves slowly forward.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_4.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/4.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A well-maintained lawn with vibrant green grass and scattered autumn leaves leads to a charming white gazebo with a dark roof and railing, nestled in a dense forest. sunlight filters through the trees, casting dynamic shadows on the grass. the gazebo, featuring a cupola and railing, stands on a wooden platform, surrounded by mature trees with rich foliage, suggesting a secluded, tranquil setting. The scene is consistently bathed in sunlight, highlighting the lush greenery and the gazebo's architectural details, with the forest floor showing signs of seasonal change. ; Camera: The camera moves according to the #trajectory.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_5.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/5.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A modern kitchen and dining area with wooden cabinetry, granite countertops, and stainless steel appliances. a breakfast bar with two grey stools is visible, and the dining space includes a wooden table set for four with a green and white patterned rug. the area is well-lit by natural light from large windows with white blinds. Decorative elements like a bowl of red apples, a vase with greenery, and a framed abstract painting add to the ambiance. The kitchen's open design extends into the dining area, creating a spacious and inviting atmosphere. ; Camera: The camera moves according to the #trajectory.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_6.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/6.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; padding: 8px;">
+              <p style="font-size: 14px; margin: 0; line-height: 1.5" class="serif">
+                Object: A view of a wooden staircase leading to an upper floor, with a small window and a framed artwork on the wall. the scene transitions to a serene interior with a wooden handrail, a window, and a framed artwork, with a bedroom visible in the background. next, the view opens to a spacious bedroom with a slanted ceiling, a large bed, and a wooden dresser. The bedroom features a modern design with a neutral color palette, recessed lighting, and a flat-screen TV. The video concludes with a similar bedroom scene, emphasizing the room's tranquil ambiance. ; Camera: The camera moves according to the #trajectory.
+              </p>
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <img src="resources/processed_7.jpg">
+            </td>
+            <td style="vertical-align: top; padding: 8px;">
+              <video controls autoplay muted loop style="width: 100%">
+                <source src="resources/7.mp4" type="video/mp4" />
+                Your browser does not support the video element.
+              </video>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="content">
+      <p style="font-size: 1.2em" class="serif">
+        We borrow the source code of this project page from
+        <a href="https://dreambooth.github.io/">DreamBooth</a>.
+      </p>
+    </div>
+  </body>
+</html>
